@@ -2,21 +2,22 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import pandas
+from datetime import date
 
 
-#source = requests.get('https://www.mediamarkt.se/sv/category/_alla-tv-apparater-564040.html?searchParams=%2FSearch.ff%3FfilterTabbedCategory%3Donlineshop%26filterCategoriesROOT%3DTV%25C2%25A7MediaSEsvc510055%26filterCategoriesROOT%252FTV%25C2%25A7MediaSEsvc510055%3DAlla%2BTV-apparater%25C2%25A7MediaSEsvc564040%26filteravailability%3D1%26filtercurrentprice%3D6479%2B-%2B17933%26channel%3Dmmsesv%26productsPerPage%3D24%26followSearch%3D10000%26disableTabbedCategory%3Dtrue%26navigation%3Dtrue%26filterSk%25C3%25A4rmstorlek%3D55%2B-%2B77&sort=price&view=PRODUCTLIST&page=').text
-#source2 = requests.get('https://www.mediamarkt.se/sv/category/_alla-tv-apparater-564040.html?searchParams=%2FSearch.ff%3FfilterTabbedCategory%3Donlineshop%26filterCategoriesROOT%3DTV%25C2%25A7MediaSEsvc510055%26filterCategoriesROOT%252FTV%25C2%25A7MediaSEsvc510055%3DAlla%2BTV-apparater%25C2%25A7MediaSEsvc564040%26filteravailability%3D1%26filtercurrentprice%3D6479%2B-%2B17933%26channel%3Dmmsesv%26productsPerPage%3D24%26followSearch%3D10000%26disableTabbedCategory%3Dtrue%26navigation%3Dtrue%26filterSk%25C3%25A4rmstorlek%3D55%2B-%2B77&sort=price&view=PRODUCTLIST&page=2').text
-#source3 = requests.get('https://www.mediamarkt.se/sv/category/_alla-tv-apparater-564040.html?searchParams=%2FSearch.ff%3FfilterTabbedCategory%3Donlineshop%26filterCategoriesROOT%3DTV%25C2%25A7MediaSEsvc510055%26filterCategoriesROOT%252FTV%25C2%25A7MediaSEsvc510055%3DAlla%2BTV-apparater%25C2%25A7MediaSEsvc564040%26filteravailability%3D1%26filtercurrentprice%3D6479%2B-%2B17933%26channel%3Dmmsesv%26productsPerPage%3D24%26followSearch%3D10000%26disableTabbedCategory%3Dtrue%26navigation%3Dtrue%26filterSk%25C3%25A4rmstorlek%3D55%2B-%2B77&sort=price&view=PRODUCTLIST&page=3').text
+source = requests.get('https://www.mediamarkt.se/sv/category/_alla-tv-apparater-564040.html?searchParams=%2FSearch.ff%3FfilterTabbedCategory%3Donlineshop%26filterCategoriesROOT%3DTV%25C2%25A7MediaSEsvc510055%26filterCategoriesROOT%252FTV%25C2%25A7MediaSEsvc510055%3DAlla%2BTV-apparater%25C2%25A7MediaSEsvc564040%26filteravailability%3D1%26filtercurrentprice%3D6479%2B-%2B17933%26channel%3Dmmsesv%26productsPerPage%3D24%26followSearch%3D10000%26disableTabbedCategory%3Dtrue%26navigation%3Dtrue%26filterSk%25C3%25A4rmstorlek%3D55%2B-%2B77&sort=price&view=PRODUCTLIST&page=').text
+source2 = requests.get('https://www.mediamarkt.se/sv/category/_alla-tv-apparater-564040.html?searchParams=%2FSearch.ff%3FfilterTabbedCategory%3Donlineshop%26filterCategoriesROOT%3DTV%25C2%25A7MediaSEsvc510055%26filterCategoriesROOT%252FTV%25C2%25A7MediaSEsvc510055%3DAlla%2BTV-apparater%25C2%25A7MediaSEsvc564040%26filteravailability%3D1%26filtercurrentprice%3D6479%2B-%2B17933%26channel%3Dmmsesv%26productsPerPage%3D24%26followSearch%3D10000%26disableTabbedCategory%3Dtrue%26navigation%3Dtrue%26filterSk%25C3%25A4rmstorlek%3D55%2B-%2B77&sort=price&view=PRODUCTLIST&page=2').text
+source3 = requests.get('https://www.mediamarkt.se/sv/category/_alla-tv-apparater-564040.html?searchParams=%2FSearch.ff%3FfilterTabbedCategory%3Donlineshop%26filterCategoriesROOT%3DTV%25C2%25A7MediaSEsvc510055%26filterCategoriesROOT%252FTV%25C2%25A7MediaSEsvc510055%3DAlla%2BTV-apparater%25C2%25A7MediaSEsvc564040%26filteravailability%3D1%26filtercurrentprice%3D6479%2B-%2B17933%26channel%3Dmmsesv%26productsPerPage%3D24%26followSearch%3D10000%26disableTabbedCategory%3Dtrue%26navigation%3Dtrue%26filterSk%25C3%25A4rmstorlek%3D55%2B-%2B77&sort=price&view=PRODUCTLIST&page=3').text
 
-#file = open("mediamarkt.txt", "w")
-#file2 = open("mediamarkt2.txt", "w")
-#file3 = open("mediamarkt3.txt", "w")
-#file.write(source)
-#file2.write(source2)
-#file3.write(source3)
-#file2.close()
-#file3.close()
-#file.close()
+file = open("mediamarkt.txt", "w")
+file2 = open("mediamarkt2.txt", "w")
+file3 = open("mediamarkt3.txt", "w")
+file.write(source)
+file2.write(source2)
+file3.write(source3)
+file2.close()
+file3.close()
+file.close()
 
 file = open("mediamarkt.txt", "r")
 file2 = open("mediamarkt2.txt", "r")
@@ -58,7 +59,7 @@ export = pandas.DataFrame({'Name': names,
                            'Price': prices,
                            })[cols]
 
-export.to_excel('mediamarkt.xls')
+export.to_excel('mediamarkt_'+str(date.today())+'.xls')
 
 
 file.close()
