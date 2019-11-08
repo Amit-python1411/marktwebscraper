@@ -10,9 +10,8 @@ files = []
 
 for source in sources:
     get_page = requests.get('%s' % source).text
-    file = open("mediamarkt_%d.txt" % count, "w")
-    file.write(get_page)
-    file.close()
+    with open("mediamarkt_%d.txt" % count, "w") as file_open:
+        file_open.write(get_page)
     file = open("mediamarkt_%d.txt" % count, "r")
     files.append(file)
     count += 1
